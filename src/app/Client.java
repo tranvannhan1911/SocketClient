@@ -56,7 +56,7 @@ public class Client {
 	public Client() {
 		new Thread(() -> {
 			try {
-				socket = new Socket("10.42.0.101", 9999);
+				socket = new Socket("localhost", 9999);
 				out = new ObjectOutputStream(socket.getOutputStream());
 				in = new DataInputStream(socket.getInputStream());
 
@@ -94,7 +94,7 @@ public class Client {
 		panel.add(btnRestart);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(null, "Delete file", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBorder(new TitledBorder(null, "Open location", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_2.add(panel_1);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
@@ -102,8 +102,8 @@ public class Client {
 		panel_1.add(txtPathFile);
 		txtPathFile.setColumns(30);
 		
-		JButton btnDelete = new JButton("Delete");
-		panel_1.add(btnDelete);
+		JButton btnOpen = new JButton("Open");
+		panel_1.add(btnOpen);
 		
 		JPanel panel_3 = new JPanel();
 		panel_2.add(panel_3);
@@ -141,22 +141,20 @@ public class Client {
 			}
 		});
 		
-		btnDelete.addActionListener(v -> {
-			int answer = JOptionPane.showConfirmDialog(frame, "Are you sure ?");
-			if(answer == 0) {
-				try {
-					String path = txtPathFile.getText();
-					
-					System.out.println("sending...");
-					out.writeUTF("delete");
-					out.writeUTF(path);
-					out.flush();
-					
-					handleResult();
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
+		btnOpen.addActionListener(v -> {
+			try {
+				String path = txtPathFile.getText();
+				
+				System.out.println("sending...");
+				out.writeUTF("open");
+				out.writeUTF(path);
+				out.flush();
+				
+				handleResult();
+			} catch (Exception e1) {
+				e1.printStackTrace();
 			}
+			
 		});
 	}
 	
