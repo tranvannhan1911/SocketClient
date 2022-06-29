@@ -56,7 +56,7 @@ public class Client {
 	public Client() {
 		new Thread(() -> {
 			try {
-				socket = new Socket("localhost", 9999);
+				socket = new Socket("10.42.0.101", 9999);
 				out = new ObjectOutputStream(socket.getOutputStream());
 				in = new DataInputStream(socket.getInputStream());
 
@@ -83,18 +83,18 @@ public class Client {
 		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.Y_AXIS));
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(BorderFactory.createTitledBorder("Tắt máy và khởi động lại"));
+		panel.setBorder(BorderFactory.createTitledBorder("Shutdown and Restart"));
 		panel_2.add(panel);
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JButton btnShutDown = new JButton("Tắt máy");
+		JButton btnShutDown = new JButton("Shutdown");
 		panel.add(btnShutDown);
 		
-		JButton btnRestart = new JButton("Khởi động lại");
+		JButton btnRestart = new JButton("Restart");
 		panel.add(btnRestart);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(null, "X\u00F3a file", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBorder(new TitledBorder(null, "Delete file", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_2.add(panel_1);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
@@ -102,7 +102,7 @@ public class Client {
 		panel_1.add(txtPathFile);
 		txtPathFile.setColumns(30);
 		
-		JButton btnDelete = new JButton("Xóa file");
+		JButton btnDelete = new JButton("Delete");
 		panel_1.add(btnDelete);
 		
 		JPanel panel_3 = new JPanel();
@@ -112,7 +112,7 @@ public class Client {
 		panel_3.add(lblResult);
 		
 		btnShutDown.addActionListener(v -> {
-			int answer = JOptionPane.showConfirmDialog(frame, "Bạn có chắc chắn muốn tắt máy ?");
+			int answer = JOptionPane.showConfirmDialog(frame, "Are you sure ?");
 			if(answer == 0) {
 				try {
 					System.out.println("sending...");
@@ -127,7 +127,7 @@ public class Client {
 		});
 		
 		btnRestart.addActionListener(v -> {
-			int answer = JOptionPane.showConfirmDialog(frame, "Bạn có chắc chắn muốn khởi động lại máy ?");
+			int answer = JOptionPane.showConfirmDialog(frame, "Are you sure ?");
 			if(answer == 0) {
 				try {
 					System.out.println("sending...");
@@ -142,7 +142,7 @@ public class Client {
 		});
 		
 		btnDelete.addActionListener(v -> {
-			int answer = JOptionPane.showConfirmDialog(frame, "Bạn có chắc chắn muốn xóa file ?");
+			int answer = JOptionPane.showConfirmDialog(frame, "Are you sure ?");
 			if(answer == 0) {
 				try {
 					String path = txtPathFile.getText();
